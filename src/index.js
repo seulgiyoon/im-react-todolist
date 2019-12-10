@@ -42,35 +42,89 @@ import ReactDOM from 'react-dom';
 //   }
 // }
 
-class TodoListItem extends React.Component {
+// class TodoListItem extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       done: false
+//     };
+//   }
+
+//   onListItemClick() {
+//     this.setState({
+//       done: !this.state.done
+//       // done이 false면 true로, true면 false로 바꿈
+//     })
+//   }
+  
+//   render() {
+//     const style = {
+//       textDecoration: this.state.done ? 'line-through' : 'none'
+//     };
+
+//     return <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.todo}</li>
+//   }
+// }
+
+// const TodoList = (props) => {
+//   return (
+//     <ul>
+//       {props.todos.map(todo =>
+//         <TodoListItem key={todo} todo={todo} />
+//       )}
+//     </ul>
+//   )
+// }
+
+// GroceryListItem의 list들 즉,
+// 들은 클릭을 했을 때 state가 변해서 crossed-out style이 되게끔 작성을 해주세요.
+// list들을 hover 했을 때에 글자가 bold가 되게도 해주세요.
+
+
+class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      done: false
+      done: false,
+      hover: false
     };
   }
 
   onListItemClick() {
     this.setState({
       done: !this.state.done
-      // done이 false면 true로, true면 false로 바꿈
-    })
+    });
   }
-  
+
+  onListItemHover() {
+    this.setState({
+      hover: !this.state.hover
+    });
+  }
+
   render() {
     const style = {
-      textDecoration: this.state.done ? 'line-through' : 'none'
-    };
-
-    return <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.todo}</li>
+      textDecoration: this.state.done ? 'line-through' : 'none',
+      fontWeight: this.state.hover ? 'bold' : 'normal'
+    }
+    return (
+    <li style = {style} 
+    onClick={this.onListItemClick.bind(this)} 
+    onMouseOver={this.onListItemHover.bind(this)}
+    onMouseOut={this.onListItemHover.bind(this)}>{this.props.item}</li>
+    // https://reactjs.org/docs/events.html#mouse-events
+    )
   }
 }
 
-const TodoList = (props) => {
+const GroceryList = (props) => {
   return (
     <ul>
-      {props.todos.map(todo =>
-        <TodoListItem key={todo} todo={todo} />
+      {props.grocery.map(item =>
+        <GroceryListItem
+          key={item} 
+          item={item} 
+        />
       )}
     </ul>
   )
@@ -79,12 +133,11 @@ const TodoList = (props) => {
 const App = () => {
   return (
     <div>
-      <h1>My React</h1>
-      <TodoList 
-        todos={[
-          '리액트 익히기',
-          '리액트 연습하기',
-          '리액트 리액트하기'
+      <h1>My GroceryList</h1>
+      <GroceryList 
+        grocery={[
+          'Cucumbers',
+          'Kale'
         ]} 
       />
     </div>
