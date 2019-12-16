@@ -15,7 +15,7 @@ class App extends React.Component {
     // completedTodoList: this.state.currentCategoryTodoList.filter(todo => todo.isComplete === true)
 
     this.updateTodoList = this.updateTodoList.bind(this);
-    // this.viewCurrentCategoryTodoList = this.viewCurrentCategoryTodoList.bind(this);
+    this.viewCurrentCategoryTodoList = this.viewCurrentCategoryTodoList.bind(this);
   }
   
   id = 0
@@ -34,19 +34,21 @@ class App extends React.Component {
       currentCategoryTodoList: currentCategoryTodoList.concat(newTodo)
     });
     this.id = this.id + 1;
+    console.log(this.state.currentCategoryTodoList);
   }
 
-  // viewCurrentCategoryTodoList(category) {
-  //   this.setState({
-  //     currentCategoryTodoList: this.state.todoList
-  //       .filter(todo => todo.category === category)
-  //   });
-  // }
+  viewCurrentCategoryTodoList(category) {
+    this.setState({
+      currentCategory: category,
+      currentCategoryTodoList: this.state.todoList
+        .filter(todo => todo.category === category)
+    });
+  }
 
   render() {
     return (
       <main>
-        <Nav />
+        <Nav viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}/>
         <TodoList
           currentCategory={this.state.currentCategory}
           updateTodoList={this.updateTodoList}

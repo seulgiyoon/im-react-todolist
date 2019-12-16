@@ -36,8 +36,9 @@ class TodoList extends React.Component {
   render() {
     return (
       <section>
-        <div id="category-title">
+        <div id="category-nav">
           <h2>{this.props.currentCategory}</h2>
+          <button>할일 추가</button>
         </div>
         {/* <CompleteTodoList /> */}
         {this.props.currentCategoryTodoList.map(todo =>
@@ -46,7 +47,7 @@ class TodoList extends React.Component {
             todo={todo}
           />
         )}
-        <div className="default-input">
+        <div id="todo-default-form">
           <label></label>
           <input 
             type="text" 
@@ -62,6 +63,7 @@ class TodoList extends React.Component {
   }
 }
 
+// 할일 만들기 버튼 만들기 -> 누르면 인풋에 커서 위치하도록
 // label이든 뭔가 클릭할 수 있는 아이콘이든이, input에 커서가 갔을 때 display 되도록 해야 함. 그 전에는 hidden
 
 export default TodoList;

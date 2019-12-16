@@ -2,11 +2,11 @@ import React from 'react';
 import Category from './Category';
 // import Search from '';
 
-const Nav = () => {
+const Nav = (props) => {
   return (
-    <div>
-      <Category />
-    </div>
+    <nav>
+      <Category viewCurrentCategoryTodoList={props.viewCurrentCategoryTodoList}/>
+    </nav>
   );
 }
 

@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0
+}
+
+input {
+  border: none;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+}
+
+.todoList-entry, .category-entry, #todo-default-form, #category-default-form {
+  border-bottom: 1px solid rgb(211, 211, 211);
+}
