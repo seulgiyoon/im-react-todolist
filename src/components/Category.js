@@ -14,6 +14,7 @@ class Category extends React.Component {
     this.updateCategory = this.updateCategory.bind(this);
     this.handleEnterEvent = this.handleEnterEvent.bind(this);
     this.handleBlurEvent = this.handleBlurEvent.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
   }
 
   handleChange(e) {
@@ -42,15 +43,24 @@ class Category extends React.Component {
     }
   }
 
+  removeCategory(name) {
+    const removedArr = this.state.categories.filter(category => category !== name)
+    this.setState({
+      categories: removedArr
+    })
+    this.props.removeCategory(name);
+  }
+
   render() {
     return (
-      <div>
-        <button>카테고리 추가</button>
+      <div id="category-wrapper">
+        <button id="category-add-btn">카테고리 추가</button>
         {this.state.categories.map(category =>
           <CategoryEntry
             key={category}
             category={category}
             viewCurrentCategoryTodoList={this.props.viewCurrentCategoryTodoList}
+            removeCategory={this.removeCategory}
           />
         )}
         <div id="category-default-form">

@@ -1,5 +1,5 @@
 import React from 'react';
-// import CompleteTodoList from '';
+import CompletedList from './CompletedList';
 import TodoListEntry from './TodoListEntry';
 
 class TodoList extends React.Component {
@@ -36,19 +36,24 @@ class TodoList extends React.Component {
   render() {
     return (
       <section>
-        <div id="category-nav">
+        <div id="todo-list-nav">
           <h2>{this.props.currentCategory}</h2>
           <button>할일 추가</button>
         </div>
-        {/* <CompleteTodoList /> */}
+        <CompletedList 
+          completedTodoList={this.props.completedTodoList}
+          toggleTodoComplete={this.props.toggleTodoComplete}
+          removeTodo={this.props.removeTodo}
+        />
         {this.props.currentCategoryTodoList.map(todo =>
           <TodoListEntry
             key={todo.id}
             todo={todo}
+            removeTodo={this.props.removeTodo}
+            toggleTodoComplete={this.props.toggleTodoComplete}
           />
         )}
         <div id="todo-default-form">
-          <label></label>
           <input 
             type="text" 
             value={this.state.text}

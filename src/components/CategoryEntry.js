@@ -5,12 +5,16 @@ class CategoryEntry extends React.Component {
     super(props);
     this.state = {
       category: '',
-      isEditable: true
+      isEditable: true,
+      isHover: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
+    this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
+    this.handleOnClickButton = this.handleOnClickButton.bind(this);
   }
 
   handleChange(e) {
@@ -25,13 +29,31 @@ class CategoryEntry extends React.Component {
 
   handleClick(e) {
     this.props.viewCurrentCategoryTodoList(e.target.value);
-    console.log(e.target)
+  }
+
+  handleOnMouseEnter(e) {
+    this.setState({
+      isHover: true
+    })
+  }
+
+  handleOnMouseLeave(e) {
+    this.setState({
+      isHover: false
+    })
+  }
+
+  handleOnClickButton(e) {
+    this.props.removeCategory(this.props.category)
   }
 
   render() {
     return (
-      <div className="category-entry">
-        <label></label>
+      <div 
+        className="category-entry"
+        onMouseEnter={this.handleOnMouseEnter}
+        onMouseLeave={this.handleOnMouseLeave}
+      >
         <input
           type="text"
           value={this.props.category}
@@ -39,13 +61,13 @@ class CategoryEntry extends React.Component {
           onDoubleClick={this.handleDoubleClick}
           onClick={this.handleClick}
         />
+        {this.state.isHover? <button onClick={this.handleOnClickButton}>x</button> : ''}
     </div>
     )
   }
 }
 
 // disabled={this.state.isEditable} 이걸 걸면 클릭이 안되는것..? 헉............... 그럼 뭘로 이벤트를 걸어??
-
 // value를.. 위에서 가져와서 인식해야하나?? onchange시 위의 state를 변경해서 여기에 반영되도록?
 // 이름 클릭 시 카테고리명을 app에서 받은 함수에 넘겨서 currentCategoryTodoList 업데이트
 // 이름 더블클릭 시 수정 가능해야함
