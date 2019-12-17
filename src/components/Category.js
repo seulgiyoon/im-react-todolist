@@ -7,8 +7,10 @@ class Category extends React.Component {
 
     this.state = {
       text: '',
-      categories: ['분류하지 않은 할일'],
+      categories: ['미분류'],
     };
+
+    this.textInput = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
     this.updateCategory = this.updateCategory.bind(this);
@@ -54,7 +56,12 @@ class Category extends React.Component {
   render() {
     return (
       <div id="category-wrapper">
-        <button id="category-add-btn">카테고리 추가</button>
+        <button 
+          className="btn add-category"
+          onClick={() => this.textInput.current.focus()}
+        >
+          카테고리 추가
+        </button>
         {this.state.categories.map(category =>
           <CategoryEntry
             key={category}
@@ -66,6 +73,7 @@ class Category extends React.Component {
         <div id="category-default-form">
           <label></label>
           <input 
+            ref={this.textInput}
             type="text" 
             id="category-default-input"
             value={this.state.text}

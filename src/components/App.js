@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       todoList: [],
       currentCategoryTodoList: [],
-      currentCategory: '분류하지 않은 할일',
+      currentCategory: '미분류',
       completedTodoList: []
     }
 
@@ -64,7 +64,7 @@ class App extends React.Component {
   removeCategory(category) {
     const removedArr = this.state.todoList.filter(todo => todo.id !== category)
 
-    this.viewCurrentCategoryTodoList('분류하지 않은 할일', removedArr);
+    this.viewCurrentCategoryTodoList('미분류', removedArr);
 
     console.log('removeCategory 호출됨')
   }

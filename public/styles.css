@@ -1,21 +1,37 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  /* outline: 0; */
+  outline: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
 }
 
-button {
-  background-color: thistle;
+::placeholder {
+  color: rgb(167, 167, 167)
+}
+
+.btn {
+  background-color: seagreen;
   border: none;
   font-size: 13px;
-  font-weight: bold;
-  color: #555;
+  /* font-weight: bold; */
+  color: rgb(255, 255, 255);
   padding: 5px 10px;
   border-radius: 3px;
 }
 
-#category-add-btn {
+.btn.delete {
+  padding: 2px 8px;
+}
+
+.btn.add-category {
   margin-bottom: 8px;
+}
+
+.btn.complete-list-open {
+  background-color: transparent;
+  color: seagreen;
+  font-weight: 700;
 }
 
 input {
@@ -30,6 +46,18 @@ input {
   border-radius: 3px;
   padding: 5px;
   margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.category-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-entry input,
+#category-default-form input {
+  padding: 5px 10px;
 }
 
 body {
@@ -40,7 +68,7 @@ body {
 }
 
 #root {
-  width: 1000px;
+  width: 900px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -53,32 +81,47 @@ main {
   height: 700px;
   display: flex;
   background-color: white;
+  box-shadow: 0 2px 3px 0 rgb(0, 0, 0, 0.1);
 }
 
 nav, section {
-  padding: 20px;
+  padding: 25px;
 }
 
 nav {
-  flex: 0 0 300px;
+  flex: 0 0 250px;
 }
 
 section {
-  flex: 0 0 700px;
+  flex: 0 0 650px;
 }
 
 #category-wrapper {
-  margin-top: 25px;
-}
-
-#delete-btn {
-  z-index: 9999;
+  margin-top: 20px;
 }
 
 #todo-list-nav {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+#todo-list-nav .btn {
+  align-self: center;
+}
+
+#completed-list input {
+  color: grey;
+}
+
+#completed-list.active {
+  padding-bottom: 10px;
+  border-bottom: 1px dotted rgb(255, 99, 71, 0.8);
+  margin-bottom: 10px;
+}
+
+#todo-default-form {
+  padding-left: 18px;
 }
 
 .todoList-entry {
@@ -88,15 +131,26 @@ section {
 
 .todoList-label-inComplete, .todoList-label-complete {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: 2px solid seagreen;
+  border: 3px solid seagreen;
 }
 
 .todoList-label-complete {
   border: none;
-  background-color: tomato;
+  background-color: rgb(255, 99, 71, 0.8);
+}
+
+/* .completed-list-info {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.completed-list-info p {
+  font-size: 13px;
+  color: grey;
+  padding-left: 8px; 
 }
 
 /* .todoList-entry, .category-entry, input {

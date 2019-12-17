@@ -61,7 +61,10 @@ class CategoryEntry extends React.Component {
           onDoubleClick={this.handleDoubleClick}
           onClick={this.handleClick}
         />
-        {this.state.isHover? <button onClick={this.handleOnClickButton}>x</button> : ''}
+        {this.state.isHover && this.props.category !== '미분류' ?
+          <button className="btn delete" onClick={this.handleOnClickButton}>×</button> 
+          : ''
+        }
     </div>
     )
   }

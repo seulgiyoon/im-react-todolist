@@ -56,7 +56,7 @@ class CompletedListEntry extends React.Component {
           value={this.props.todo.text}
           onChange={this.handleChange}
         />
-        {this.state.isHover? <button id="delete-btn" onClick={this.handleOnClickButton}>x</button> : ''}
+        {this.state.isHover? <button className="btn delete" onClick={this.handleOnClickButton}>×</button> : ''}
       </div>
     )
   }

@@ -10,6 +10,8 @@ class TodoList extends React.Component {
       text: '',
     };
 
+    this.textInput = React.createRef();
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleEnterEvent = this.handleEnterEvent.bind(this);
     this.handleBlurEvent = this.handleBlurEvent.bind(this);
@@ -38,7 +40,10 @@ class TodoList extends React.Component {
       <section>
         <div id="todo-list-nav">
           <h2>{this.props.currentCategory}</h2>
-          <button>할일 추가</button>
+          <button 
+            className="btn"
+            onClick={() => this.textInput.current.focus()}
+          >일과 추가</button>
         </div>
         <CompletedList 
           completedTodoList={this.props.completedTodoList}
@@ -55,12 +60,13 @@ class TodoList extends React.Component {
         )}
         <div id="todo-default-form">
           <input 
+            ref={this.textInput}
             type="text" 
             value={this.state.text}
             onChange={this.handleChange}
             onKeyPress={this.handleEnterEvent}
             onBlur={this.handleBlurEvent}
-            placeholder="오늘의 할일"
+            placeholder="오늘의 일과"
           />
         </div>
       </section>
