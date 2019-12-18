@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  outline: 0;
+  /* outline: 0; */
   font-family: 'Noto Sans KR', sans-serif;
   color: #333;
 }
@@ -24,6 +24,10 @@
   padding: 2px 8px;
 }
 
+.btn.complete.delete {
+  background-color: rgb(255, 99, 71, 0.8);
+}
+
 .btn.add-category {
   margin-bottom: 8px;
 }
@@ -34,7 +38,7 @@
   font-weight: 700;
 }
 
-input {
+input, .todoList-text, .complete-List-text {
   width: 70%;
   border: none;
   padding: 10px;
@@ -110,7 +114,7 @@ section {
   align-self: center;
 }
 
-#completed-list input {
+.complete-List-text {
   color: grey;
 }
 

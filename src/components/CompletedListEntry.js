@@ -4,7 +4,6 @@ class CompletedListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
       isHover: false,
     }
 
@@ -12,10 +11,6 @@ class CompletedListEntry extends React.Component {
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
     this.handleOnClickButton = this.handleOnClickButton.bind(this);
     this.handleOnClickLabel = this.handleOnClickLabel.bind(this);
-  }
-
-  handleChange(e) {
-    console.log(e.target.value);
   }
 
   handleOnMouseEnter(e) {
@@ -47,20 +42,17 @@ class CompletedListEntry extends React.Component {
       >
         <div 
           className="todoList-label-complete"
-          
           onClick={this.handleOnClickLabel}
         ></div>
-        <input
-          type="text"
-          id="todoList-input"
-          value={this.props.todo.text}
-          onChange={this.handleChange}
-        />
-        {this.state.isHover? <button className="btn delete" onClick={this.handleOnClickButton}>×</button> : ''}
+        <p
+          className="complete-List-text" 
+        >
+          {this.props.todo.text}
+        </p>
+        {this.state.isHover? <button className="btn complete delete" onClick={this.handleOnClickButton}>×</button> : ''}
       </div>
     )
   }
 }
 
 export default CompletedListEntry;
-

@@ -24,14 +24,14 @@ class TodoList extends React.Component {
   handleEnterEvent(e) {
     if (e.key === 'Enter' && this.state.text) {
       this.props.updateTodoList(this.state.text);
-      this.setState( { text: '' });
+      this.setState({ text: '' });
     }
   }
 
-  handleBlurEvent(e) {
+  handleBlurEvent() {
     if (this.state.text) {
       this.props.updateTodoList(this.state.text);
-      this.setState( { text: '' });
+      this.setState({ text: '' });
     }
   }
 
@@ -43,7 +43,9 @@ class TodoList extends React.Component {
           <button 
             className="btn"
             onClick={() => this.textInput.current.focus()}
-          >일과 추가</button>
+          >
+          일과 추가
+          </button>
         </div>
         <CompletedList 
           completedTodoList={this.props.completedTodoList}
@@ -56,6 +58,7 @@ class TodoList extends React.Component {
             todo={todo}
             removeTodo={this.props.removeTodo}
             toggleTodoComplete={this.props.toggleTodoComplete}
+            updateTodoText={this.props.updateTodoText}
           />
         )}
         <div id="todo-default-form">
@@ -73,8 +76,5 @@ class TodoList extends React.Component {
     )
   }
 }
-
-// 할일 만들기 버튼 만들기 -> 누르면 인풋에 커서 위치하도록
-// label이든 뭔가 클릭할 수 있는 아이콘이든이, input에 커서가 갔을 때 display 되도록 해야 함. 그 전에는 hidden
 
 export default TodoList;
