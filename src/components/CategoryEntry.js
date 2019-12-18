@@ -40,7 +40,7 @@ class CategoryEntry extends React.Component {
 
   handleOnDoubleClickText() {
     this.setState({
-      text: this.props.todo.text,
+      text: this.props.category.name,
       isEditable: true
     });
   }
@@ -61,9 +61,9 @@ class CategoryEntry extends React.Component {
         {this.state.isEditable ?
         <Input 
           text={this.state.text}
-          category="category"
-          // updateTodoText={this.props.updateTodoText}
-          // todo={this.props.todo}
+          calledByCategory="category"
+          updateCategoryName={this.props.updateCategoryName}
+          category={this.props.category}
           changeEditableState={this.changeEditableState}
         />
         : <p 

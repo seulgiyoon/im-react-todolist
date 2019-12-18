@@ -26,24 +26,38 @@ class Input extends React.Component {
     });
   }
 
+  liftStates() {
+    if (this.props.calledByCategory) {
+      this.props.updateCategoryName(this.props.category, this.state.text)
+    } else {
+      this.props.updateTodoText(this.props.todo.id, this.state.text);
+    }
+    this.props.changeEditableState();
+  }
+
   handleEnterEvent(e) {
     if (e.key === 'Enter' && this.state.text) {
-      this.props.updateTodoText(this.props.todo.id, this.state.text);
-      this.props.changeEditableState();
+
+      this.liftStates();
+
+      // this.props.updateTodoText(this.props.todo.id, this.state.text);
+      // this.props.changeEditableState();
     }
   }
 
   handleBlurEvent() {
     if (this.state.text) {
-      console.log(this.state.text);
-      this.props.updateTodoText(this.props.todo.id, this.state.text);
-      this.props.changeEditableState();
+      this.liftStates();
+
+      // this.props.updateTodoText(this.props.todo.id, this.state.text);
+      // this.props.changeEditableState();
     }
   }
 
   componentDidMount() {
     this.inputRef.current.focus();
     this.setDefaultText(this.props.text); // 이것도 안티패턴인가? 바로 설정만 안하면 괜찮은건지??
+
   }
 
   render() {
@@ -51,7 +65,7 @@ class Input extends React.Component {
       <input
         ref={this.inputRef}
         type="text"
-        className="todoList-input"
+        className={this.props.calledByCategory ? "category-input" : "todoList-input"}
         value={this.state.text}
         onChange={this.handleChange}
         onKeyPress={this.handleEnterEvent}

@@ -9,6 +9,7 @@ const Nav = (props) => {
       <Category 
         viewCurrentCategoryTodoList={props.viewCurrentCategoryTodoList}
         removeCategory = {props.removeCategory}
+        updateCategoryName={props.updateCategoryName}
       />
     </nav>
   );

@@ -18,6 +18,7 @@ class Category extends React.Component {
     this.handleEnterEvent = this.handleEnterEvent.bind(this);
     this.handleBlurEvent = this.handleBlurEvent.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
+    this.updateCategoryName = this.updateCategoryName.bind(this);
   }
 
   handleChange(e) {
@@ -61,6 +62,19 @@ class Category extends React.Component {
     this.props.removeCategory(targetCategory);
   }
 
+  updateCategoryName(targetCategory, newName) {
+    // const targetCategory = this.state.categories.filter(category => category.id === id)[0]
+    targetCategory.name = newName;
+    const changedArr = this.state.categories
+      .filter(category => category.id !== targetCategory.id).concat(targetCategory);
+    this.setState({
+      categories: changedArr
+    })
+    this.props.updateCategoryName(targetCategory); //이름이 이미 바뀐 상태의 category
+  }
+
+  // 여기서의 업데이트가 필요함. 업데이트 한 카테고리를 위로 올려서 그 정보로 todo내부의 카테고리 정보를 변경하기
+
   render() {
     return (
       <div id="category-wrapper">
@@ -76,6 +90,7 @@ class Category extends React.Component {
             category={category}
             viewCurrentCategoryTodoList={this.props.viewCurrentCategoryTodoList}
             removeCategory={this.removeCategory}
+            updateCategoryName={this.updateCategoryName}
           />
         )}
         <div id="category-default-form">

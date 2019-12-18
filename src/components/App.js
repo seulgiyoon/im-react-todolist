@@ -18,6 +18,7 @@ class App extends React.Component {
     this.removeCategory = this.removeCategory.bind(this);
     this.toggleTodoComplete = this.toggleTodoComplete.bind(this);
     this.updateTodoText = this.updateTodoText.bind(this);
+    this.updateCategoryName = this.updateCategoryName.bind(this);
   }
   
   id = 0
@@ -73,14 +74,16 @@ class App extends React.Component {
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
   }
 
-  // updateCategoryName(oldName, newName) {
-  //   const updatedTodo = this.state.todoList.filter(todo => todo.category === oldName);
-  //   updatedTodo.text = text;
-  //   const changedArr = this.state.todoList
-  //     .filter(todo => todo.id !== id).concat(updatedTodo);
+  updateCategoryName(targetCategory) {
+    console.log('updateCategoryName 호출')
 
-  //   this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
-  // }
+    const updatedTodo = this.state.todoList.filter(todo => todo.category.id === targetCategory.id);
+    updatedTodo.forEach(todo => todo.category.name = targetCategory.name);
+    const changedArr = this.state.todoList
+      .filter(todo => todo.category.id !== targetCategory.id).concat(updatedTodo);
+
+    this.viewCurrentCategoryTodoList(targetCategory, changedArr);
+  }
 
   render() {
     return (
@@ -88,6 +91,7 @@ class App extends React.Component {
         <Nav 
           viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}
           removeCategory={this.removeCategory}
+          updateCategoryName={this.updateCategoryName}
         />
         <TodoList
           currentCategory={this.state.currentCategory}
