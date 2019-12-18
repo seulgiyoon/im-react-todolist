@@ -5,7 +5,7 @@ class Input extends React.Component {
     super(props);
     this.state = {
       text: '',
-    }
+    };
 
     this.inputRef = React.createRef();
 
@@ -16,19 +16,19 @@ class Input extends React.Component {
 
   setDefaultText(text) {
     this.setState({
-      text: text
-    })
+      text: text,
+    });
   }
 
   handleChange(e) {
     this.setState({
-      text: e.target.value
+      text: e.target.value,
     });
   }
 
   liftStates() {
     if (this.props.calledByCategory) {
-      this.props.updateCategoryName(this.props.category, this.state.text)
+      this.props.updateCategoryName(this.props.category, this.state.text);
     } else {
       this.props.updateTodoText(this.props.todo.id, this.state.text);
     }
@@ -37,27 +37,19 @@ class Input extends React.Component {
 
   handleEnterEvent(e) {
     if (e.key === 'Enter' && this.state.text) {
-
       this.liftStates();
-
-      // this.props.updateTodoText(this.props.todo.id, this.state.text);
-      // this.props.changeEditableState();
     }
   }
 
   handleBlurEvent() {
     if (this.state.text) {
       this.liftStates();
-
-      // this.props.updateTodoText(this.props.todo.id, this.state.text);
-      // this.props.changeEditableState();
     }
   }
 
   componentDidMount() {
     this.inputRef.current.focus();
-    this.setDefaultText(this.props.text); // 이것도 안티패턴인가? 바로 설정만 안하면 괜찮은건지??
-
+    this.setDefaultText(this.props.text);
   }
 
   render() {
@@ -65,13 +57,13 @@ class Input extends React.Component {
       <input
         ref={this.inputRef}
         type="text"
-        className={this.props.calledByCategory ? "category-input" : "todoList-input"}
+        className={this.props.calledByCategory ? 'category-input' : 'todoList-input'}
         value={this.state.text}
         onChange={this.handleChange}
         onKeyPress={this.handleEnterEvent}
         onBlur={this.handleBlurEvent}
       />
-    )
+    );
   }
 }
 

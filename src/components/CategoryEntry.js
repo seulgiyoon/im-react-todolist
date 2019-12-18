@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input'
+import Input from './Input';
 
 class CategoryEntry extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class CategoryEntry extends React.Component {
       category: '',
       isEditable: false,
       isHover: false,
-    }
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
@@ -24,72 +24,67 @@ class CategoryEntry extends React.Component {
 
   handleOnMouseEnter() {
     this.setState({
-      isHover: true
-    })
+      isHover: true,
+    });
   }
 
   handleOnMouseLeave() {
     this.setState({
-      isHover: false
-    })
+      isHover: false,
+    });
   }
 
   handleOnClickButton() {
-    this.props.removeCategory(this.props.category)
+    this.props.removeCategory(this.props.category);
   }
 
   handleOnDoubleClickText() {
     this.setState({
       text: this.props.category.name,
-      isEditable: true
+      isEditable: true,
     });
   }
 
   changeEditableState() {
     this.setState({
-      isEditable: false
+      isEditable: false,
     });
   }
 
   render() {
     return (
-      <div 
+      <div
         className="category-entry"
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
       >
-        {this.state.isEditable ?
-        <Input 
-          text={this.state.text}
-          calledByCategory="category"
-          updateCategoryName={this.props.updateCategoryName}
-          category={this.props.category}
-          changeEditableState={this.changeEditableState}
-        />
-        : <p 
-          className="category-text"
-          onClick={this.handleClick}
-          onDoubleClick={this.handleOnDoubleClickText}
-        >
-          {this.props.category.name}
-        </p>
-        }
-        {this.state.isHover && this.props.category.name !== '미분류' ?
-          <button className="btn delete" onClick={this.handleOnClickButton}>×</button> 
-          : ''
-        }
-    </div>
-    )
+        {this.state.isEditable ? (
+          <Input
+            text={this.state.text}
+            calledByCategory="category"
+            updateCategoryName={this.props.updateCategoryName}
+            category={this.props.category}
+            changeEditableState={this.changeEditableState}
+          />
+        ) : (
+          <p
+            className="category-text"
+            onClick={this.handleClick}
+            onDoubleClick={this.handleOnDoubleClickText}
+          >
+            {this.props.category.name}
+          </p>
+        )}
+        {this.state.isHover && this.props.category.name !== '미분류' ? (
+          <button className="btn delete" onClick={this.handleOnClickButton}>
+            ×
+          </button>
+        ) : (
+          ''
+        )}
+      </div>
+    );
   }
 }
-
-
-{/* <input
-type="text"
-value={this.props.category}
-onChange={this.handleChange}
-onDoubleClick={this.handleDoubleClick}
-onClick={this.handleClick}
-/> */}
 
 export default CategoryEntry;

@@ -7,10 +7,9 @@ class Category extends React.Component {
 
     this.state = {
       text: '',
-      categories: [{id: 0, name: '미분류'}],
+      categories: [{ id: 0, name: '미분류' }],
     };
 
-    // 카테고리 저장 시 카테고리도 id 부여
     this.textInput = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,20 +24,20 @@ class Category extends React.Component {
     this.setState({ text: e.target.value });
   }
 
-  id = 1
+  id = 1;
 
   updateCategory(text) {
     const newCategory = {
       id: this.id,
-      name: text
-    }
+      name: text,
+    };
 
     this.setState({
-      categories: this.state.categories.concat(newCategory)
+      categories: this.state.categories.concat(newCategory),
     });
 
     this.props.viewCurrentCategoryTodoList(newCategory);
-    this.setState( { text: '' });
+    this.setState({ text: '' });
     this.id = this.id + 1;
   }
 
@@ -55,36 +54,33 @@ class Category extends React.Component {
   }
 
   removeCategory(targetCategory) {
-    const removedArr = this.state.categories.filter(category => category.name !== targetCategory.name)
+    const removedArr = this.state.categories.filter(
+      category => category.name !== targetCategory.name,
+    );
     this.setState({
-      categories: removedArr
-    })
+      categories: removedArr,
+    });
     this.props.removeCategory(targetCategory);
   }
 
   updateCategoryName(targetCategory, newName) {
-    // const targetCategory = this.state.categories.filter(category => category.id === id)[0]
     targetCategory.name = newName;
     const changedArr = this.state.categories
-      .filter(category => category.id !== targetCategory.id).concat(targetCategory);
+      .filter(category => category.id !== targetCategory.id)
+      .concat(targetCategory);
     this.setState({
-      categories: changedArr
-    })
-    this.props.updateCategoryName(targetCategory); //이름이 이미 바뀐 상태의 category
+      categories: changedArr,
+    });
+    this.props.updateCategoryName(targetCategory);
   }
-
-  // 여기서의 업데이트가 필요함. 업데이트 한 카테고리를 위로 올려서 그 정보로 todo내부의 카테고리 정보를 변경하기
 
   render() {
     return (
       <div id="category-wrapper">
-        <button 
-          className="btn add-category"
-          onClick={() => this.textInput.current.focus()}
-        >
+        <button className="btn add-category" onClick={() => this.textInput.current.focus()}>
           카테고리 추가
         </button>
-        {this.state.categories.map(category =>
+        {this.state.categories.map(category => (
           <CategoryEntry
             key={category.id}
             category={category}
@@ -92,22 +88,21 @@ class Category extends React.Component {
             removeCategory={this.removeCategory}
             updateCategoryName={this.updateCategoryName}
           />
-        )}
+        ))}
         <div id="category-default-form">
-          <input 
+          <input
             ref={this.textInput}
-            type="text" 
+            type="text"
             id="category-default-input"
             value={this.state.text}
             onChange={this.handleChange}
             onKeyPress={this.handleEnterEvent}
             onBlur={this.handleBlurEvent}
           />
+        </div>
       </div>
-    </div>
-    )
+    );
   }
-
 }
 
 export default Category;

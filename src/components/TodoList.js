@@ -11,7 +11,7 @@ class TodoList extends React.Component {
     };
 
     this.textInput = React.createRef();
-    
+
     this.handleChange = this.handleChange.bind(this);
     this.handleEnterEvent = this.handleEnterEvent.bind(this);
     this.handleBlurEvent = this.handleBlurEvent.bind(this);
@@ -21,17 +21,20 @@ class TodoList extends React.Component {
     this.setState({ text: e.target.value });
   }
 
+  updateTodoList() {
+    this.props.updateTodoList(this.state.text);
+    this.setState({ text: '' });
+  }
+
   handleEnterEvent(e) {
     if (e.key === 'Enter' && this.state.text) {
-      this.props.updateTodoList(this.state.text);
-      this.setState({ text: '' });
+      this.updateTodoList();
     }
   }
 
   handleBlurEvent() {
     if (this.state.text) {
-      this.props.updateTodoList(this.state.text);
-      this.setState({ text: '' });
+      this.updateTodoList();
     }
   }
 
@@ -40,19 +43,16 @@ class TodoList extends React.Component {
       <section>
         <div id="todo-list-nav">
           <h2>{this.props.currentCategory.name}</h2>
-          <button 
-            className="btn"
-            onClick={() => this.textInput.current.focus()}
-          >
-          일과 추가
+          <button className="btn" onClick={() => this.textInput.current.focus()}>
+            일과 추가
           </button>
         </div>
-        <CompletedList 
+        <CompletedList
           completedTodoList={this.props.completedTodoList}
           toggleTodoComplete={this.props.toggleTodoComplete}
           removeTodo={this.props.removeTodo}
         />
-        {this.props.currentCategoryTodoList.map(todo =>
+        {this.props.currentCategoryTodoList.map(todo => (
           <TodoListEntry
             key={todo.id}
             todo={todo}
@@ -60,11 +60,11 @@ class TodoList extends React.Component {
             toggleTodoComplete={this.props.toggleTodoComplete}
             updateTodoText={this.props.updateTodoText}
           />
-        )}
+        ))}
         <div id="todo-default-form">
-          <input 
+          <input
             ref={this.textInput}
-            type="text" 
+            type="text"
             value={this.state.text}
             onChange={this.handleChange}
             onKeyPress={this.handleEnterEvent}
@@ -73,7 +73,7 @@ class TodoList extends React.Component {
           />
         </div>
       </section>
-    )
+    );
   }
 }
 

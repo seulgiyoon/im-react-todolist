@@ -8,29 +8,31 @@ class App extends React.Component {
     this.state = {
       todoList: [],
       currentCategoryTodoList: [],
-      currentCategory: {id: 0, name: '미분류'},
-      completedTodoList: []
-    }
+      currentCategory: { id: 0, name: '미분류' },
+      completedTodoList: [],
+    };
 
-    this.updateTodoList = this.updateTodoList.bind(this);
     this.viewCurrentCategoryTodoList = this.viewCurrentCategoryTodoList.bind(this);
+    this.updateTodoList = this.updateTodoList.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
     this.toggleTodoComplete = this.toggleTodoComplete.bind(this);
     this.updateTodoText = this.updateTodoText.bind(this);
     this.updateCategoryName = this.updateCategoryName.bind(this);
   }
-  
-  id = 0
+
+  id = 0;
 
   viewCurrentCategoryTodoList(category, todoArr = this.state.todoList) {
     this.setState({
       todoList: todoArr,
       currentCategory: category,
-      currentCategoryTodoList: todoArr
-        .filter(todo => todo.category.name === category.name && todo.isComplete === false),
-      completedTodoList: todoArr
-        .filter(todo => todo.category.name === category.name && todo.isComplete === true)
+      currentCategoryTodoList: todoArr.filter(
+        todo => todo.category.name === category.name && todo.isComplete === false,
+      ),
+      completedTodoList: todoArr.filter(
+        todo => todo.category.name === category.name && todo.isComplete === true,
+      ),
     });
   }
 
@@ -40,7 +42,7 @@ class App extends React.Component {
       text: text,
       category: this.state.currentCategory,
       isComplete: false,
-    }
+    };
     const updatedArr = this.state.todoList.concat(newTodo);
     this.id = this.id + 1;
     this.viewCurrentCategoryTodoList(this.state.currentCategory, updatedArr);
@@ -53,14 +55,13 @@ class App extends React.Component {
 
   removeCategory(category) {
     const removedArr = this.state.todoList.filter(todo => todo.category.name !== category.name);
-    this.viewCurrentCategoryTodoList({id: 0, name: '미분류'}, removedArr);
+    this.viewCurrentCategoryTodoList({ id: 0, name: '미분류' }, removedArr);
   }
 
   toggleTodoComplete(id) {
     const completedTodo = this.state.todoList.filter(todo => todo.id === id)[0];
     completedTodo.isComplete = !completedTodo.isComplete;
-    const changedArr = this.state.todoList
-      .filter(todo => todo.id !== id).concat(completedTodo);
+    const changedArr = this.state.todoList.filter(todo => todo.id !== id).concat(completedTodo);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
   }
@@ -68,19 +69,17 @@ class App extends React.Component {
   updateTodoText(id, text) {
     const updatedTodo = this.state.todoList.filter(todo => todo.id === id)[0];
     updatedTodo.text = text;
-    const changedArr = this.state.todoList
-      .filter(todo => todo.id !== id).concat(updatedTodo);
+    const changedArr = this.state.todoList.filter(todo => todo.id !== id).concat(updatedTodo);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
   }
 
   updateCategoryName(targetCategory) {
-    console.log('updateCategoryName 호출')
-
     const updatedTodo = this.state.todoList.filter(todo => todo.category.id === targetCategory.id);
-    updatedTodo.forEach(todo => todo.category.name = targetCategory.name);
+    updatedTodo.forEach(todo => (todo.category.name = targetCategory.name));
     const changedArr = this.state.todoList
-      .filter(todo => todo.category.id !== targetCategory.id).concat(updatedTodo);
+      .filter(todo => todo.category.id !== targetCategory.id)
+      .concat(updatedTodo);
 
     this.viewCurrentCategoryTodoList(targetCategory, changedArr);
   }
@@ -88,7 +87,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <Nav 
+        <Nav
           viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}
           removeCategory={this.removeCategory}
           updateCategoryName={this.updateCategoryName}
@@ -104,7 +103,7 @@ class App extends React.Component {
           updateTodoText={this.updateTodoText}
         />
       </main>
-    )
+    );
   }
 }
 

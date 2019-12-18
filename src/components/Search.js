@@ -4,8 +4,8 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
-    }
+      text: '',
+    };
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -16,14 +16,14 @@ class Search extends React.Component {
 
   render() {
     return (
-      <input 
+      <input
         id="search-input"
         type="text"
         value={this.state.text}
         onChange={this.handleChange}
         placeholder="검색"
       />
-    )
+    );
   }
 }
 

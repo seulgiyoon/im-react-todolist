@@ -2,17 +2,17 @@ import React from 'react';
 import Category from './Category';
 import Search from './Search';
 
-const Nav = (props) => {
+const Nav = props => {
   return (
     <nav>
       <Search />
-      <Category 
+      <Category
         viewCurrentCategoryTodoList={props.viewCurrentCategoryTodoList}
-        removeCategory = {props.removeCategory}
+        removeCategory={props.removeCategory}
         updateCategoryName={props.updateCategoryName}
       />
     </nav>
   );
-}
+};
 
 export default Nav;
