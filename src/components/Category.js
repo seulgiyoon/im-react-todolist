@@ -7,9 +7,10 @@ class Category extends React.Component {
 
     this.state = {
       text: '',
-      categories: ['미분류'],
+      categories: [{id: 0, name: '미분류'}],
     };
 
+    // 카테고리 저장 시 카테고리도 id 부여
     this.textInput = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,34 +24,41 @@ class Category extends React.Component {
     this.setState({ text: e.target.value });
   }
 
+  id = 1
+
   updateCategory(text) {
+    const newCategory = {
+      id: this.id,
+      name: text
+    }
+
     this.setState({
-      categories: this.state.categories.concat(text)
+      categories: this.state.categories.concat(newCategory)
     });
+
+    this.props.viewCurrentCategoryTodoList(newCategory);
+    this.setState( { text: '' });
+    this.id = this.id + 1;
   }
 
   handleEnterEvent(e) {
     if (e.key === 'Enter' && this.state.text) {
       this.updateCategory(this.state.text);
-      this.props.viewCurrentCategoryTodoList(this.state.text);
-      this.setState( { text: '' });
     }
   }
 
   handleBlurEvent(e) {
     if (this.state.text) {
       this.updateCategory(this.state.text);
-      this.props.viewCurrentCategoryTodoList(this.state.text);
-      this.setState( { text: '' });
     }
   }
 
-  removeCategory(name) {
-    const removedArr = this.state.categories.filter(category => category !== name)
+  removeCategory(targetCategory) {
+    const removedArr = this.state.categories.filter(category => category.name !== targetCategory.name)
     this.setState({
       categories: removedArr
     })
-    this.props.removeCategory(name);
+    this.props.removeCategory(targetCategory);
   }
 
   render() {
@@ -64,14 +72,13 @@ class Category extends React.Component {
         </button>
         {this.state.categories.map(category =>
           <CategoryEntry
-            key={category}
+            key={category.id}
             category={category}
             viewCurrentCategoryTodoList={this.props.viewCurrentCategoryTodoList}
             removeCategory={this.removeCategory}
           />
         )}
         <div id="category-default-form">
-          <label></label>
           <input 
             ref={this.textInput}
             type="text" 
@@ -87,11 +94,5 @@ class Category extends React.Component {
   }
 
 }
-
-// 카테고리 만들기 버튼 만들기 -> 누르면 인풋에 커서 위치하도록... 이거 어떻게 하는거임..? 쿼리셀렉터로 특정 인풋 지정을 못하는데..?
-// categoryEntry에서 생성되면 여기에서 state로 목록을 관리, 그 목록 안의
-// categoryNames를 다시 categoryEntry로 뿌림... 이 아니고... 이것도 인풋 있어야겠는데.
-// 아니면 추가버튼. TodoList랑 상황이 같음.
-
 
 export default Category;

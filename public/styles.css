@@ -38,7 +38,7 @@
   font-weight: 700;
 }
 
-input, .todoList-text, .complete-List-text {
+input, .todoList-text, .complete-List-text, .category-text {
   width: 70%;
   border: none;
   padding: 10px;

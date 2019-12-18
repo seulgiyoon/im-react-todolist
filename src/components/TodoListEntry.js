@@ -10,22 +10,13 @@ class TodoListEntry extends React.Component {
       isEditable: false,
     }
 
-    // this.inputRef = React.createRef(); 
-
-    // this.handleChange = this.handleChange.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
     this.handleOnClickButton = this.handleOnClickButton.bind(this);
     this.handleOnClickLabel = this.handleOnClickLabel.bind(this);
-    this.handleOnDoubleClickText = this.handleOnDoubleClickText.bind(this);
+    this.handleOnClickText = this.handleOnClickText.bind(this);
     this.changeEditableState = this.changeEditableState.bind(this);
   }
-
-  // handleChange(e) {
-  //   this.setState({
-  //     text: e.target.value
-  //   });
-  // }
 
   handleOnMouseEnter() {
     this.setState({
@@ -47,7 +38,7 @@ class TodoListEntry extends React.Component {
     this.props.toggleTodoComplete(this.props.todo.id);
   }
 
-  handleOnDoubleClickText() {
+  handleOnClickText() {
     this.setState((state) => {
       return {
         text: this.props.todo.text,
@@ -82,7 +73,7 @@ class TodoListEntry extends React.Component {
         />
         : <p 
           className="todoList-text" 
-          onClick={this.handleOnDoubleClickText}
+          onClick={this.handleOnClickText}
         >
           {this.props.todo.text}
         </p>
@@ -95,7 +86,7 @@ class TodoListEntry extends React.Component {
 }
 
 // 더블클릭 시 editable 값이 true로 변하고, true일 시 input을 로딩함. 아닐 시 일반 div를 로딩?? div를 더블클릭하면 input으로 변하는.
-// 더블클릭 전에는 수정 못하다가 더블클릭 시 내용 수정 가능하게.. onDoubleClick?
+// 더블클릭 전에는 수정 못하다가 더블클릭 시 내용 수정 가능하게.. OnClick?
 // 수정 후 엔터 시 수정된 내용 전송
 
 export default TodoListEntry;

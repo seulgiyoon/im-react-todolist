@@ -39,7 +39,7 @@ class TodoList extends React.Component {
     return (
       <section>
         <div id="todo-list-nav">
-          <h2>{this.props.currentCategory}</h2>
+          <h2>{this.props.currentCategory.name}</h2>
           <button 
             className="btn"
             onClick={() => this.textInput.current.focus()}

@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       todoList: [],
       currentCategoryTodoList: [],
-      currentCategory: '미분류',
+      currentCategory: {id: 0, name: '미분류'},
       completedTodoList: []
     }
 
@@ -27,9 +27,9 @@ class App extends React.Component {
       todoList: todoArr,
       currentCategory: category,
       currentCategoryTodoList: todoArr
-        .filter(todo => todo.category === category && todo.isComplete === false),
+        .filter(todo => todo.category.name === category.name && todo.isComplete === false),
       completedTodoList: todoArr
-        .filter(todo => todo.category === category && todo.isComplete === true)
+        .filter(todo => todo.category.name === category.name && todo.isComplete === true)
     });
   }
 
@@ -40,29 +40,19 @@ class App extends React.Component {
       category: this.state.currentCategory,
       isComplete: false,
     }
-
     const updatedArr = this.state.todoList.concat(newTodo);
     this.id = this.id + 1;
-
     this.viewCurrentCategoryTodoList(this.state.currentCategory, updatedArr);
-
-    // console.log('updateTodoList 호출됨');
   }
 
   removeTodo(id) {
     const removedArr = this.state.todoList.filter(todo => todo.id !== id);
-    
     this.viewCurrentCategoryTodoList(this.state.currentCategory, removedArr);
-
-    // console.log('removeTodo 호출됨');
   }
 
   removeCategory(category) {
-    const removedArr = this.state.todoList.filter(todo => todo.id !== category);
-
-    this.viewCurrentCategoryTodoList('미분류', removedArr);
-
-    // console.log('removeCategory 호출됨');
+    const removedArr = this.state.todoList.filter(todo => todo.category.name !== category.name);
+    this.viewCurrentCategoryTodoList({id: 0, name: '미분류'}, removedArr);
   }
 
   toggleTodoComplete(id) {
@@ -72,8 +62,6 @@ class App extends React.Component {
       .filter(todo => todo.id !== id).concat(completedTodo);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
-
-    // console.log('toggleTodoComplete 호출됨')
   }
 
   updateTodoText(id, text) {
@@ -83,9 +71,16 @@ class App extends React.Component {
       .filter(todo => todo.id !== id).concat(updatedTodo);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
-
-    console.log('updateTodoText 호출됨')
   }
+
+  // updateCategoryName(oldName, newName) {
+  //   const updatedTodo = this.state.todoList.filter(todo => todo.category === oldName);
+  //   updatedTodo.text = text;
+  //   const changedArr = this.state.todoList
+  //     .filter(todo => todo.id !== id).concat(updatedTodo);
+
+  //   this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
+  // }
 
   render() {
     return (
