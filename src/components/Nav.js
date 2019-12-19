@@ -10,6 +10,7 @@ const Nav = props => {
         viewCurrentCategoryTodoList={props.viewCurrentCategoryTodoList}
         removeCategory={props.removeCategory}
         updateCategoryName={props.updateCategoryName}
+        setSearchingToFalse={props.setSearchingToFalse}
       />
     </nav>
   );

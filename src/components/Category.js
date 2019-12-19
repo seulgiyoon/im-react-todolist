@@ -90,6 +90,7 @@ class Category extends React.Component {
             viewCurrentCategoryTodoList={this.props.viewCurrentCategoryTodoList}
             removeCategory={this.removeCategory}
             updateCategoryName={this.updateCategoryName}
+            setSearchingToFalse={this.props.setSearchingToFalse}
           />
         ))}
         <div id="category-default-form">

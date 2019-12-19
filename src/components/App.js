@@ -128,6 +128,7 @@ class App extends React.Component {
           removeCategory={this.removeCategory}
           updateCategoryName={this.updateCategoryName}
           searchTodo={this.searchTodo}
+          setSearchingToFalse={this.setSearchingToFalse}
         />
         {this.state.isSearching ? (
           <SearchList

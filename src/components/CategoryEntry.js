@@ -20,6 +20,7 @@ class CategoryEntry extends React.Component {
 
   handleClick() {
     this.props.viewCurrentCategoryTodoList(this.props.category);
+    this.props.setSearchingToFalse();
   }
 
   handleOnMouseEnter() {
