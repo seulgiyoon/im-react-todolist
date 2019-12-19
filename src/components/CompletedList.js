@@ -1,28 +1,54 @@
 import React from 'react';
 import CompletedListEntry from './CompletedListEntry';
 
-const CompletedList = props => {
-  return (
-    <div id="completed-list" className={props.completedTodoList.length !== 0 ? 'active' : ''}>
-      {props.completedTodoList.length > 0 ? (
-        <div className="completed-list-info">
-          <p>{`완료한 일과 ${props.completedTodoList.length}개`}</p>
-          {/* <button className="btn complete-list-open">보기</button> */}
-        </div>
-      ) : (
-        ''
-      )}
-      {props.completedTodoList.map(todo => (
-        <CompletedListEntry
-          key={todo.id}
-          todo={todo}
-          completed={'completed'}
-          removeTodo={props.removeTodo}
-          toggleTodoComplete={props.toggleTodoComplete}
-        />
-      ))}
-    </div>
-  );
-};
+class CompletedList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowList: false,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => {
+      return {
+        isShowList: !state.isShowList,
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div
+        id="completed-list"
+        className={this.props.completedTodoList.length !== 0 ? 'active' : ''}
+      >
+        {this.props.completedTodoList.length > 0 ? (
+          <div className="completed-list-info">
+            <p>{`완료한 일과 ${this.props.completedTodoList.length}개`}</p>
+            <button className="btn complete-list-open" onClick={this.handleClick}>
+              {this.state.isShowList ? '닫기' : '보기'}
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
+        {this.state.isShowList
+          ? this.props.completedTodoList.map(todo => (
+              <CompletedListEntry
+                key={todo.id}
+                todo={todo}
+                completed={'completed'}
+                removeTodo={this.props.removeTodo}
+                toggleTodoComplete={this.props.toggleTodoComplete}
+              />
+            ))
+          : ''}
+      </div>
+    );
+  }
+}
 
 export default CompletedList;
