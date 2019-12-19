@@ -1,13 +1,13 @@
 import React from 'react';
 
 const SearchListEntry = props => {
-  const handleDoubleClick = () => {
+  const handleClick = () => {
     props.viewCurrentCategoryTodoList(props.todo.category);
     props.setSearchingToFalse();
   };
 
   return (
-    <div className="search-result-wrapper" onDoubleClick={handleDoubleClick}>
+    <div className="search-result-wrapper" onClick={handleClick}>
       <div className="search-result-category-name">{props.todo.category.name}</div>
       <div className="todoList-entry">
         <div
