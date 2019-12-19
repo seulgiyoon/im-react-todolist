@@ -5,7 +5,7 @@ import Search from './Search';
 const Nav = props => {
   return (
     <nav>
-      <Search />
+      <Search searchTodo={props.searchTodo} />
       <Category
         viewCurrentCategoryTodoList={props.viewCurrentCategoryTodoList}
         removeCategory={props.removeCategory}

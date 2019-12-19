@@ -24,7 +24,7 @@ class Category extends React.Component {
     this.setState({ text: e.target.value });
   }
 
-  id = 1;
+  id = 2;
 
   updateCategory(text) {
     const newCategory = {

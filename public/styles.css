@@ -146,10 +146,10 @@ section {
   background-color: rgb(255, 99, 71, 0.8);
 }
 
-/* .completed-list-info {
+.completed-list-info {
   display: flex;
   justify-content: space-between;
-} */
+}
 
 .completed-list-info p {
   font-size: 13px;

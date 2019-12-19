@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import Nav from './Nav';
+import SearchList from './SearchList';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,8 +9,10 @@ class App extends React.Component {
     this.state = {
       todoList: [],
       currentCategoryTodoList: [],
-      currentCategory: { id: 0, name: '미분류' },
+      currentCategory: { id: 1, name: '미분류' },
       completedTodoList: [],
+      searchResult: [],
+      isSearching: false,
     };
 
     this.viewCurrentCategoryTodoList = this.viewCurrentCategoryTodoList.bind(this);
@@ -19,11 +22,12 @@ class App extends React.Component {
     this.toggleTodoComplete = this.toggleTodoComplete.bind(this);
     this.updateTodoText = this.updateTodoText.bind(this);
     this.updateCategoryName = this.updateCategoryName.bind(this);
+    this.searchTodo = this.searchTodo.bind(this);
   }
 
   id = 0;
 
-  viewCurrentCategoryTodoList(category, todoArr = this.state.todoList) {
+  viewCurrentCategoryTodoList(category, todoArr = this.state.todoList, searchResult = []) {
     this.setState({
       todoList: todoArr,
       currentCategory: category,
@@ -33,6 +37,7 @@ class App extends React.Component {
       completedTodoList: todoArr.filter(
         todo => todo.category.name === category.name && todo.isComplete === true,
       ),
+      searchResult: searchResult,
     });
   }
 
@@ -88,6 +93,26 @@ class App extends React.Component {
     this.viewCurrentCategoryTodoList(targetCategory, changedArr);
   }
 
+  searchTodo(word) {
+    if (word.length > 0) {
+      this.setState({
+        isSearching: true,
+      });
+      const searchTitle = {
+        id: 0,
+        name: `'${word}'에 대한 검색결과`,
+      };
+      const regex = new RegExp(word, 'gi');
+      const targetTodosArr = this.state.todoList.filter(todo => todo.text.match(regex));
+      this.viewCurrentCategoryTodoList(searchTitle, undefined, targetTodosArr);
+    } else {
+      this.setState({
+        isSearching: false,
+      });
+      this.viewCurrentCategoryTodoList({ id: 1, name: '미분류' });
+    }
+  }
+
   render() {
     return (
       <main>
@@ -95,17 +120,26 @@ class App extends React.Component {
           viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}
           removeCategory={this.removeCategory}
           updateCategoryName={this.updateCategoryName}
+          searchTodo={this.searchTodo}
         />
-        <TodoList
-          currentCategory={this.state.currentCategory}
-          updateTodoList={this.updateTodoList}
-          currentCategoryTodoList={this.state.currentCategoryTodoList}
-          removeTodo={this.removeTodo}
-          removeCategory={this.removeCategory}
-          completedTodoList={this.state.completedTodoList}
-          toggleTodoComplete={this.toggleTodoComplete}
-          updateTodoText={this.updateTodoText}
-        />
+        {this.state.isSearching ? 
+          <SearchList 
+            currentCategory={this.state.currentCategory}
+            searchResult={this.state.searchResult}
+            viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}
+          /> 
+        :
+          <TodoList
+            currentCategory={this.state.currentCategory}
+            updateTodoList={this.updateTodoList}
+            currentCategoryTodoList={this.state.currentCategoryTodoList}
+            removeTodo={this.removeTodo}
+            removeCategory={this.removeCategory}
+            completedTodoList={this.state.completedTodoList}
+            toggleTodoComplete={this.toggleTodoComplete}
+            updateTodoText={this.updateTodoText}
+          />
+        }
       </main>
     );
   }

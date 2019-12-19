@@ -8,10 +8,21 @@ class Search extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleEnterEvent = this.handleEnterEvent.bind(this);
   }
 
   handleChange(e) {
-    console.log('');
+    this.props.searchTodo(e.target.value);
+    this.setState({
+      text: e.target.value,
+    });
+
+  }
+
+  handleEnterEvent(e) {
+    if (e.key === 'Enter' && this.state.text) {
+      this.props.searchTodo(e.target.value);
+    }
   }
 
   render() {
@@ -21,6 +32,7 @@ class Search extends React.Component {
         type="text"
         value={this.state.text}
         onChange={this.handleChange}
+        onKeyPress={this.handleEnterEvent}
         placeholder="검색"
       />
     );
