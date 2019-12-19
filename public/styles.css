@@ -1,13 +1,13 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  /* outline: 0; */
+  outline: 0;
   font-family: 'Noto Sans KR', sans-serif;
   color: #333;
 }
 
 ::placeholder {
-  color: rgb(167, 167, 167)
+  color: rgb(201, 201, 201)
 }
 
 .btn {
@@ -18,14 +18,19 @@
   color: rgb(255, 255, 255);
   padding: 5px 10px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .btn.delete {
   padding: 2px 8px;
+  color: seagreen;
+  background-color: white;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .btn.complete.delete {
-  background-color: rgb(255, 99, 71, 0.8);
+  color: rgb(255, 99, 71, 0.8);
 }
 
 .btn.add-category {
@@ -34,18 +39,19 @@
 
 .btn.complete-list-open {
   background-color: transparent;
-  color: seagreen;
+  color: rgb(255, 99, 71, 0.9);
   font-weight: 700;
 }
 
 input, .todoList-text, .complete-List-text, .category-text {
-  width: 70%;
+  width: 80%;
   border: none;
   padding: 10px;
   font-size: 15px;
 }
 
 #search-input {
+  width: 90%;
   border: 1px solid rgb(172, 172, 172);
   border-radius: 3px;
   padding: 5px;
@@ -60,8 +66,9 @@ input, .todoList-text, .complete-List-text, .category-text {
 }
 
 .category-entry input,
+.category-text,
 #category-default-form input {
-  padding: 5px 10px;
+  padding: 7px 10px;
 }
 
 body {
@@ -72,7 +79,7 @@ body {
 }
 
 #root {
-  width: 900px;
+  width: 700px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -89,15 +96,15 @@ main {
 }
 
 nav, section {
-  padding: 25px;
+  padding: 27px;
 }
 
 nav {
-  flex: 0 0 250px;
+  flex: 0 0 200px;
 }
 
 section {
-  flex: 0 0 650px;
+  flex: 0 0 500px;
 }
 
 #category-wrapper {
@@ -120,8 +127,8 @@ section {
 
 #completed-list.active {
   padding-bottom: 10px;
-  border-bottom: 1px dotted rgb(255, 99, 71, 0.8);
-  margin-bottom: 10px;
+  /* border-bottom: 1px dotted rgb(255, 99, 71, 0.8); */
+  /* margin-bottom: 10px; */
 }
 
 #todo-default-form {
@@ -133,28 +140,54 @@ section {
   align-items: center;
 }
 
-.todoList-label-inComplete, .todoList-label-complete {
+.todoList-label-inComplete, .todoList-label-complete,
+.search-label-complete, .search-label-inComplete {
   display: inline-block;
   width: 18px;
   height: 18px;
   border-radius: 50%;
   border: 3px solid seagreen;
+  cursor: pointer;
 }
 
-.todoList-label-complete {
+.todoList-label-complete, .search-label-complete, 
+.search-label-inComplete {
   border: none;
   background-color: rgb(255, 99, 71, 0.8);
+}
+
+.search-label-complete, .search-label-inComplete {
+  cursor: default;
+}
+
+.search-label-inComplete {
+  background-color: seagreen;
 }
 
 .completed-list-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.completed-list-info p {
+.completed-list-info p,
+.search-result-category-name {
   font-size: 13px;
-  color: grey;
+  color: rgb(255, 99, 71, 0.9);
   padding-left: 8px; 
+}
+
+.search-result-category-name {
+  color: rgb(46, 139, 87);
+}
+
+.search-result-wrapper {
+  margin-bottom: 8px;
+}
+
+.search-result-wrapper .todoList-text {
+  padding: 7px 10px;
+  cursor: pointer;
 }
 
 /* .todoList-entry, .category-entry, input {
