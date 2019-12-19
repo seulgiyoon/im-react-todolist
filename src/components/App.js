@@ -62,6 +62,7 @@ class App extends React.Component {
     const completedTodo = this.state.todoList.filter(todo => todo.id === id)[0];
     completedTodo.isComplete = !completedTodo.isComplete;
     const changedArr = this.state.todoList.filter(todo => todo.id !== id).concat(completedTodo);
+    changedArr.sort((a, b) => a.id - b.id);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
   }
@@ -70,6 +71,7 @@ class App extends React.Component {
     const updatedTodo = this.state.todoList.filter(todo => todo.id === id)[0];
     updatedTodo.text = text;
     const changedArr = this.state.todoList.filter(todo => todo.id !== id).concat(updatedTodo);
+    changedArr.sort((a, b) => a.id - b.id);
 
     this.viewCurrentCategoryTodoList(this.state.currentCategory, changedArr);
   }
@@ -80,6 +82,8 @@ class App extends React.Component {
     const changedArr = this.state.todoList
       .filter(todo => todo.category.id !== targetCategory.id)
       .concat(updatedTodo);
+    
+    changedArr.sort((a, b) => a.id - b.id);
 
     this.viewCurrentCategoryTodoList(targetCategory, changedArr);
   }

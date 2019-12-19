@@ -68,6 +68,9 @@ class Category extends React.Component {
     const changedArr = this.state.categories
       .filter(category => category.id !== targetCategory.id)
       .concat(targetCategory);
+
+    changedArr.sort((a, b) => a.id - b.id);
+
     this.setState({
       categories: changedArr,
     });
