@@ -16,7 +16,6 @@ class Search extends React.Component {
     this.setState({
       text: e.target.value,
     });
-
   }
 
   handleEnterEvent(e) {

@@ -23,6 +23,7 @@ class App extends React.Component {
     this.updateTodoText = this.updateTodoText.bind(this);
     this.updateCategoryName = this.updateCategoryName.bind(this);
     this.searchTodo = this.searchTodo.bind(this);
+    this.setSearchingToFalse = this.setSearchingToFalse.bind(this);
   }
 
   id = 0;
@@ -87,7 +88,7 @@ class App extends React.Component {
     const changedArr = this.state.todoList
       .filter(todo => todo.category.id !== targetCategory.id)
       .concat(updatedTodo);
-    
+
     changedArr.sort((a, b) => a.id - b.id);
 
     this.viewCurrentCategoryTodoList(targetCategory, changedArr);
@@ -113,6 +114,12 @@ class App extends React.Component {
     }
   }
 
+  setSearchingToFalse() {
+    this.setState({
+      isSearching: false,
+    });
+  }
+
   render() {
     return (
       <main>
@@ -122,13 +129,14 @@ class App extends React.Component {
           updateCategoryName={this.updateCategoryName}
           searchTodo={this.searchTodo}
         />
-        {this.state.isSearching ? 
-          <SearchList 
+        {this.state.isSearching ? (
+          <SearchList
             currentCategory={this.state.currentCategory}
             searchResult={this.state.searchResult}
             viewCurrentCategoryTodoList={this.viewCurrentCategoryTodoList}
-          /> 
-        :
+            setSearchingToFalse={this.setSearchingToFalse}
+          />
+        ) : (
           <TodoList
             currentCategory={this.state.currentCategory}
             updateTodoList={this.updateTodoList}
@@ -139,7 +147,7 @@ class App extends React.Component {
             toggleTodoComplete={this.toggleTodoComplete}
             updateTodoText={this.updateTodoText}
           />
-        }
+        )}
       </main>
     );
   }
