@@ -19,6 +19,16 @@ class CompletedList extends React.Component {
     });
   }
 
+  setIsShowListFalse() {
+    this.setState({
+      isShowList: false,
+    })
+  }
+
+  componentWillUnmount() {
+    this.setIsShowListFalse();
+  }
+
   render() {
     return (
       <div

@@ -47,11 +47,15 @@ class TodoList extends React.Component {
             일과 추가
           </button>
         </div>
-        <CompletedList
-          completedTodoList={this.props.completedTodoList}
-          toggleTodoComplete={this.props.toggleTodoComplete}
-          removeTodo={this.props.removeTodo}
-        />
+        {this.props.completedTodoList.length > 0 ? (
+          <CompletedList
+            completedTodoList={this.props.completedTodoList}
+            toggleTodoComplete={this.props.toggleTodoComplete}
+            removeTodo={this.props.removeTodo}
+          />
+        ) : (
+          ''
+        )}
         {this.props.currentCategoryTodoList.map(todo => (
           <TodoListEntry
             key={todo.id}
