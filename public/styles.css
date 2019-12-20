@@ -34,7 +34,7 @@
 }
 
 .btn.add-category {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .btn.complete-list-open {
@@ -44,18 +44,24 @@
 }
 
 input, .todoList-text, .complete-List-text, .category-text {
-  width: 80%;
+  width: 70%;
   border: none;
   padding: 10px;
   font-size: 15px;
 }
 
+.todoList-text {
+  cursor: pointer;
+}
+
+
 #search-input {
-  width: 90%;
-  border: 1px solid rgb(172, 172, 172);
+  width: 96%;
+  border: 1px solid rgb(189, 189, 189);
   border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 3px 3px 3px 5px;
+  margin-bottom: 31px;
+  margin-top: 3px;
   font-size: 13px;
 }
 
@@ -68,7 +74,7 @@ input, .todoList-text, .complete-List-text, .category-text {
 .category-entry input,
 .category-text,
 #category-default-form input {
-  padding: 7px 10px;
+  padding: 6.5px 10px;
 }
 
 body {
@@ -79,7 +85,7 @@ body {
 }
 
 #root {
-  width: 700px;
+  width: 720px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -96,19 +102,15 @@ main {
 }
 
 nav, section {
-  padding: 27px;
+  padding: 25px 27px 27px 27px;
 }
 
 nav {
-  flex: 0 0 200px;
+  flex: 0 0 220px;
 }
 
 section {
   flex: 0 0 500px;
-}
-
-#category-wrapper {
-  margin-top: 20px;
 }
 
 #todo-list-nav {
@@ -168,6 +170,7 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .completed-list-info p,
