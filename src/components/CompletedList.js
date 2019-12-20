@@ -36,9 +36,9 @@ class CompletedList extends React.Component {
         className={this.props.completedTodoList.length !== 0 ? 'active' : ''}
       >
         {this.props.completedTodoList.length > 0 ? (
-          <div className="completed-list-info">
+          <div className="completed-list-info" onClick={this.handleClick}>
             <p>{`완료한 일과 ${this.props.completedTodoList.length}개`}</p>
-            <button className="btn complete-list-open" onClick={this.handleClick}>
+            <button className="btn complete-list-open">
               {this.state.isShowList ? '닫기' : '보기'}
             </button>
           </div>
